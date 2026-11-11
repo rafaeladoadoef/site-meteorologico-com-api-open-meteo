@@ -2,7 +2,7 @@
   --fonte-titulo: "Syne", "Bricolage Grotesque", sans-serif;
   --fonte-texto: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
 
-  /
+
   --p3-blue-dark: #040c1e;
   --p3-blue-deep: #0a1b3a;
   --p3-blue-mid: #0052cc;
@@ -26,6 +26,8 @@ body[data-tema="tempestade"]  { --ceu: #0b071a; --tinta: #f5eeff; --destaque: #f
 body[data-tema="neblina"]     { --ceu: #121820; --tinta: #e0e6ed; --destaque: #9bb5ce; }
 body[data-tema="neve"]        { --ceu: #0a1c2e; --tinta: #ffffff; --destaque: #70e0ff; }
 
+
+*, *::before, *::after {
   box-sizing: border-box !important;
   max-width: 100% !important;
 }
@@ -66,7 +68,7 @@ body {
   z-index: 0;
 }
 
-.p3-watermark {
+.p3-marca {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -148,7 +150,7 @@ body {
   align-items: center;
 }
 
-.busca-icon {
+.busca-icone {
   position: absolute;
   left: 1rem;
   color: var(--destaque);
@@ -181,7 +183,7 @@ input[type="search"]::placeholder {
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* Botões */
+
 .btn-p3 {
   font-family: var(--fonte-titulo);
   font-weight: 800;
