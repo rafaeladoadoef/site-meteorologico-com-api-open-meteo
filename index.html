@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Previsão do Tempo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-tema="dia-limpo">
+  <div class="p3-bg-lines"></div>
+  <div class="p3-watermark">INFORMAÇÕES DO CLIMA</div>
+
+  <main class="app">
+
+    <header class="topo">
+      <div class="p3-badge"><i class="fa-solid fa-cloud-bolt"></i> S.E.E.S. WEATHER SYS</div>
+      
+    
+      <form id="form-busca" class="busca" role="search">
+        <label for="campo-cidade" class="sr-only">Nome da cidade</label>
+        <div class="busca-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass busca-icon"></i>
+          <input id="campo-cidade" type="search" placeholder="CIDADE 1..." autocomplete="off" required>
+        </div>
+        <button type="submit" class="btn-p3"><span class="btn-text">BUSCAR</span></button>
+        <button type="button" id="btn-local" class="btn-p3 secundario" title="Usar minha localização">
+          <i class="fa-solid fa-location-crosshairs"></i>
+          <span class="btn-text">GPS</span>
+        </button>
+      </form>
+
+   
+      <form id="form-busca-2" class="busca busca-2" role="search">
+        <div class="busca-input-wrapper">
+          <i class="fa-solid fa-code-compare busca-icon"></i>
+          <input id="campo-cidade-2" type="search" placeholder="COMPARAR COM CIDADE 2..." autocomplete="off">
+        </div>
+        <button type="submit" class="btn-p3 btn-vs"><span class="btn-text">VS</span></button>
+        <button type="button" id="btn-limpar-comp" class="btn-p3 secundario" hidden title="Fechar comparação">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </form>
+
+    
+      <div class="unidades" role="group" aria-label="Unidade de temperatura">
+        <button type="button" data-unidade="celsius" aria-pressed="true">°C</button>
+        <button type="button" data-unidade="fahrenheit" aria-pressed="false">°F</button>
+      </div>
+    </header>
+
+  
+    <ul id="sugestoes" class="sugestoes" hidden></ul>
+    <ul id="sugestoes-2" class="sugestoes" hidden></ul>
+
+    <p id="status" role="status" aria-live="polite">BUSQUE UMA CIDADE PARA CARREGAR A PREVISÃO.</p>
+
+    
+    <section id="painel" hidden>
+      <div class="p3-grid-comparacao">
+        
+        <div class="p3-coluna-cidade">
+          <div class="agora p3-card-hero">
+            <div class="agora-texto">
+              <div class="tag-status">TARGET // PRIMARY</div>
+              <h1 id="local-nome">--</h1>
+              <p id="local-detalhe" class="detalhe"></p>
+              <p id="condicao" class="condicao"></p>
+            </div>
+            <div class="temp-container">
+              <p class="temperatura">
+                <span id="temp-atual">--</span><span id="temp-unidade">°</span>
+              </p>
+            </div>
+          </div>
+
+          <dl class="medidas">
+            <div class="medida-card">
+              <dt><i class="fa-solid fa-temperature-three-quarters"></i> SENSAÇÃO</dt>
+              <dd id="sensacao">--</dd>
+            </div>
+            <div class="medida-card">
+              <dt><i class="fa-solid fa-droplet"></i> UMIDADE</dt>
+              <dd id="umidade">--</dd>
+            </div>
+            <div class="medida-card">
+              <dt><i class="fa-solid fa-wind"></i> VENTO</dt>
+              <dd id="vento">--</dd>
+            </div>
+            <div class="medida-card">
+              <dt><i class="fa-solid fa-cloud-showers-heavy"></i> PRECIPIT.</dt>
+              <dd id="chuva">--</dd>
+            </div>
+            <div class="medida-card">
+              <dt><i class="fa-solid fa-sun"></i> NASCER</dt>
+              <dd id="nascer">--</dd>
+            </div>
+            <div class="medida-card">
+              <dt><i class="fa-solid fa-moon"></i> PÔR DO SOL</dt>
+              <dd id="por">--</dd>
+            </div>
+          </dl>
+
+      
+          <section aria-labelledby="titulo-horas" class="secao-p3">
+            <h2 id="titulo-horas" class="p3-header-title">24 HORAS // C1</h2>
+            <ol id="lista-horas" class="horas"></ol>
+          </section>
+
+      
+          <section aria-labelledby="titulo-dias" class="secao-p3">
+            <h2 id="titulo-dias" class="p3-header-title">7 DIAS // C1</h2>
+            <ul id="lista-dias" class="dias"></ul>
+          </section>
+        </div>
+
+ 
+        <div id="coluna-cidade-2" class="p3-coluna-cidade" hidden>
+          <div class="agora p3-card-hero p3-card-hero-vs">
+            <div class="agora-texto">
+              <div class="tag-status tag-vs">TARGET // SECONDARY</div>
+              <h1 id="local-nome-2">--</h1>
+              <p id="local-detalhe-2" class="detalhe"></p>
+              <p id="condicao-2" class="condicao"></p>
+            </div>
+            <div class="temp-container">
+              <p class="temperatura">
+                <span id="temp-atual-2">--</span><span id="temp-unidade-2">°</span>
+              </p>
+            </div>
+          </div>
+
+       
+          <dl class="medidas">
+            <div class="medida-card medida-card-vs">
+              <dt><i class="fa-solid fa-temperature-three-quarters"></i> SENSAÇÃO</dt>
+              <dd id="sensacao-2">--</dd>
+            </div>
+            <div class="medida-card medida-card-vs">
+              <dt><i class="fa-solid fa-droplet"></i> UMIDADE</dt>
+              <dd id="umidade-2">--</dd>
+            </div>
+            <div class="medida-card medida-card-vs">
+              <dt><i class="fa-solid fa-wind"></i> VENTO</dt>
+              <dd id="vento-2">--</dd>
+            </div>
+            <div class="medida-card medida-card-vs">
+              <dt><i class="fa-solid fa-cloud-showers-heavy"></i> PRECIPIT.</dt>
+              <dd id="chuva-2">--</dd>
+            </div>
+            <div class="medida-card medida-card-vs">
+              <dt><i class="fa-solid fa-sun"></i> NASCER</dt>
+              <dd id="nascer-2">--</dd>
+            </div>
+            <div class="medida-card medida-card-vs">
+              <dt><i class="fa-solid fa-moon"></i> PÔR DO SOL</dt>
+              <dd id="por-2">--</dd>
+            </div>
+          </dl>
+
+        
+          <section aria-labelledby="titulo-horas-2" class="secao-p3">
+            <h2 id="titulo-horas-2" class="p3-header-title p3-header-vs">24 HORAS // C2</h2>
+            <ol id="lista-horas-2" class="horas"></ol>
+          </section>
+
+          <section aria-labelledby="titulo-dias-2" class="secao-p3">
+            <h2 id="titulo-dias-2" class="p3-header-title p3-header-vs">7 DIAS // C2</h2>
+            <ul id="lista-dias-2" class="dias"></ul>
+          </section>
+        </div>
+
+      </div>
+    </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
